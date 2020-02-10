@@ -1,0 +1,12 @@
+img {
+    width: 30px
+}
+
+.nav-box {
+    display: block;
+    overflow: hidden
+}
+
+.nav-box__name {
+    display: inline-block
+}
