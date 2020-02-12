@@ -34,11 +34,39 @@ class App extends React.Component {
         })
     }
 
+    getMenEmployees = () => {
+        this.setState(() => {
+            return {
+                team: this.state.fullTeam.filter((person) => person.gender === "male")
+            }
+        })
+    }
+
+    getWomanEmployees = () => {
+        this.setState(() => {
+            return {
+                team: this.state.fullTeam.filter((person) => person.gender === "female")
+            }
+        })
+    }
+
+    getAllEmployees = () => {
+        this.setState(() => {
+            return {
+                team: this.state.fullTeam
+            }
+        })
+    }
+
+    sortEmployees = () => {
+
+    }
+
     render() {
         return (
             <div>
                 <Navbar />
-                {this.state.team.length && <Employees highlightEmployee={this.highlightEmployee} team={this.state.team} />}
+                {this.state.team.length && <Employees highlightEmployee={this.highlightEmployee} team={this.state.team} getMenEmployees={this.getMenEmployees} getWomanEmployees={this.getWomanEmployees} getAllEmployees={this.getAllEmployees} />}
                 {this.state.currentEmployee && <Profile currentEmployee={this.state.currentEmployee} />}
             </div>
         )
