@@ -7,7 +7,9 @@ import API from './utils/API';
 
 class App extends React.Component {
     state = {
-        team: []
+        team: [],
+        highlight: false,
+        fullTeam: []
     }
 
     componentDidMount() {
@@ -15,19 +17,32 @@ class App extends React.Component {
             .then((result) => {
                 this.setState(() => {
                     return {
-                        team: result.data.results
+                        team: result.data.results,
+                        fullTeam: result.data.results
                     }
                 })
             })
             .catch((e) => console.log(e))
     }
 
+    highlightEmployee = (object) => {
+        this.setState(() => {
+            return {
+                highlight: true
+            }
+        })
+
+        return (
+            <Profile person={object} />
+        )
+    }
+
     render() {
         return (
             <div>
                 <Navbar />
-                {this.state.team.length && <Employees team={this.state.team} />}
-                <Profile />
+                {this.state.team.length && <Employees object={this.highlightEmployee} team={this.state.team} />}
+                {this.state.highlight && <Profile />}
             </div>
         )
     }

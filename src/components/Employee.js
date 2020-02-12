@@ -6,9 +6,10 @@ const Employee = (props) => {
     const person = props.object
 
     return (
-        <div>
+        <div className="employee-box-indy">
             <p>Name: {`${person.name.first} ${person.name.last}`}</p>
-            <p></p>
+            <p>Phone: {person.cell}</p>
+            <p>E-mail: {person.email}</p>
         </div>
     )
 };
