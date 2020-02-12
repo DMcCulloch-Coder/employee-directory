@@ -10,7 +10,11 @@ const Employees = (props) => {
             <p>Sort: drop down menu</p>
             <p>Filter: drop down menu</p>
             {props.team.map((person, index) => (
-                <Employee key={index} object={person} />
+                <Employee 
+                    key={index} 
+                    object={person}
+                    getEmployee={props.highlightEmployee}
+                />
             ))}
         </div>
     )
