@@ -8,8 +8,8 @@ import API from './utils/API';
 class App extends React.Component {
     state = {
         team: [],
-        highlight: false,
-        fullTeam: []
+        fullTeam: [],
+        currentEmployee: undefined
     }
 
     componentDidMount() {
@@ -18,31 +18,56 @@ class App extends React.Component {
                 this.setState(() => {
                     return {
                         team: result.data.results,
-                        fullTeam: result.data.results
+                        fullTeam: result.data.results,
+                        currentEmployee: result.data.results[0]
                     }
                 })
             })
             .catch((e) => console.log(e))
     }
 
-    highlightEmployee = (object) => {
+    highlightEmployee = (person) => {
         this.setState(() => {
             return {
-                highlight: true
+                currentEmployee: person
             }
         })
+    }
 
-        return (
-            <Profile person={object} />
-        )
+    getMenEmployees = () => {
+        this.setState(() => {
+            return {
+                team: this.state.fullTeam.filter((person) => person.gender === "male")
+            }
+        })
+    }
+
+    getWomanEmployees = () => {
+        this.setState(() => {
+            return {
+                team: this.state.fullTeam.filter((person) => person.gender === "female")
+            }
+        })
+    }
+
+    getAllEmployees = () => {
+        this.setState(() => {
+            return {
+                team: this.state.fullTeam
+            }
+        })
+    }
+
+    sortEmployees = () => {
+
     }
 
     render() {
         return (
             <div>
                 <Navbar />
-                {this.state.team.length && <Employees object={this.highlightEmployee} team={this.state.team} />}
-                {this.state.highlight && <Profile />}
+                {this.state.team.length && <Employees highlightEmployee={this.highlightEmployee} team={this.state.team} getMenEmployees={this.getMenEmployees} getWomanEmployees={this.getWomanEmployees} getAllEmployees={this.getAllEmployees} />}
+                {this.state.currentEmployee && <Profile currentEmployee={this.state.currentEmployee} />}
             </div>
         )
     }

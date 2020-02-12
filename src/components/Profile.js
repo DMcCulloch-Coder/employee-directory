@@ -1,11 +1,15 @@
 import React from 'react';
 import '../styles/profile.css';
 
-const Profile = () => {
+const Profile = (props) => {
+    const person = props.currentEmployee
+
     return (
         <div className="profile">
-            <h2>More info on Dude</h2>
-            <p>Dude's Pic</p>
+            <p>Name: {`${person.name.first} ${person.name.last}`}</p>
+            <p>Phone: {person.cell}</p>
+            <p>E-mail: {person.email}</p>
+            <img src={person.picture.large} alt="Profile picture" />
         </div>
     )
 };
