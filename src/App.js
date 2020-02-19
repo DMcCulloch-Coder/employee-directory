@@ -59,14 +59,27 @@ class App extends React.Component {
     }
 
     sortEmployees = () => {
-
+        this.setState(() => {
+            return {
+                team: this.state.team.sort((a, b) => {
+                    if (a.name.first < b.name.first) {
+                        return -1
+                    }
+                    if (b.name.first > a.name.first) {
+                        return 1
+                    }
+                    return 0
+                })
+            }
+        })
+        console.log(this.state.team)
     }
 
     render() {
         return (
             <div>
                 <Navbar />
-                {this.state.team.length && <Employees highlightEmployee={this.highlightEmployee} team={this.state.team} getMenEmployees={this.getMenEmployees} getWomanEmployees={this.getWomanEmployees} getAllEmployees={this.getAllEmployees} />}
+                {this.state.team.length && <Employees highlightEmployee={this.highlightEmployee} team={this.state.team} getMenEmployees={this.getMenEmployees} getWomanEmployees={this.getWomanEmployees} getAllEmployees={this.getAllEmployees} sortEmployees={this.sortEmployees} />}
                 {this.state.currentEmployee && <Profile currentEmployee={this.state.currentEmployee} />}
             </div>
         )

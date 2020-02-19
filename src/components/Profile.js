@@ -3,6 +3,7 @@ import '../styles/profile.css';
 
 const Profile = (props) => {
     const person = props.currentEmployee
+    console.log(person)
 
     return (
         <div className="profile">
